@@ -1,0 +1,39 @@
+# EPC default configuration
+# Mirrors Table I (severity bands) and the epsilon thresholds referenced
+# in Section III-A of the paper. Override via --config on the CLI.
+
+severities:
+  slight: 0.10
+  moderate: 0.25
+  severe: 0.45
+
+thresholds:
+  eps_action: 0.5     # DTW distance threshold for decision-level (L2) stability
+  eps_cost: 2.0        # allowed execution-cost delta for invariance / boundary MRs
+  eps_traj: 0.05       # allowed end-effector trajectory deviation, meters (L3)
+
+dimensions:
+  # Toggle which of the nine PC dimensions to include in a run.
+  - PC1-a   # illuminance
+  - PC1-b   # texture
+  - PC2     # perspective
+  - PC3-a   # occlusion
+  - PC3-b   # depth
+  - PC4-a   # friction
+  - PC4-b   # rigidity
+  - PC5-a   # mass magnitude
+  - PC5-b   # mass distribution (cross-embodiment)
+
+embodiments:
+  - r5a
+  - lift2
+
+eval_client:
+  worker_id: "worker_0"
+  max_steps: 500
+  chunk_mode: true
+
+run:
+  task_id: "pick_and_place_demo"
+  seed_episode_id: "seed_0001"
+  output_dir: "./epc_runs"
